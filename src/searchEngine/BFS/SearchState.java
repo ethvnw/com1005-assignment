@@ -5,6 +5,7 @@
 *   Phil Green 2013 version
 *   Heidi Christensen (heidi.christensen@sheffield.ac.uk) 2021 version
 */
+package searchEngine.BFS;
 
 import java.util.*;
 

@@ -5,6 +5,7 @@
  *	Phil Green 2013 version
  *  Heidi Christensen (heidi.christensen@sheffield.ac.uk) 2021 version
 */
+package searchEngine.Astar;
 
 import java.util.*;
 
@@ -157,7 +158,7 @@ public abstract class Search {
   //A* - if node found, remember it in old_node
   private boolean onClosed(SearchNode newNode){
 	  boolean ans = false;
-	  Iterator ic = closed.iterator();
+	  Iterator<SearchNode> ic = closed.iterator();
     while ((ic.hasNext())&& !ans){ //there can only be one node on open with same state
       SearchNode closedNode = (SearchNode) ic.next();
       if (newNode.sameState(closedNode)) {
@@ -172,7 +173,7 @@ public abstract class Search {
   // if node found, remember it in old_node
   private boolean onOpen(SearchNode newNode){
   	boolean ans = false;
-    Iterator ic = open.iterator();
+    Iterator<SearchNode> ic = open.iterator();
     while ((ic.hasNext())&& !ans){ //there can only be one node on open with same state
       SearchNode openNode = (SearchNode) ic.next();
       if (newNode.sameState(openNode)) {
@@ -211,7 +212,7 @@ public abstract class Search {
     //change from search2
     private void branchAndBound(){
 
-      Iterator i = open.iterator();
+      Iterator<SearchNode> i = open.iterator();
       SearchNode minCostNode=(SearchNode) i.next();
       for (;i.hasNext();){
         SearchNode n=(SearchNode) i.next();
@@ -227,7 +228,7 @@ public abstract class Search {
 
 	    private void AStar(){
 
-        Iterator i = open.iterator();
+        Iterator<SearchNode> i = open.iterator();
         SearchNode minCostNode=(SearchNode) i.next();
         for (;i.hasNext();){
           SearchNode n=(SearchNode) i.next();

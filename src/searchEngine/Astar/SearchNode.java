@@ -9,6 +9,7 @@
  * Heidi Christensen (heidi.christensen@sheffield.ac.uk) 2021 version
  *  
 */
+package searchEngine.Astar;
 
 import java.util.*;
 
@@ -140,7 +141,7 @@ public  class SearchNode {
   * @return ArrayList of successor nodes
   */
 
-  public ArrayList getSuccessors(Search searcher) {
+  public ArrayList<SearchNode> getSuccessors(Search searcher) {
     ArrayList<SearchState> slis = state.getSuccessors(searcher);
     ArrayList<SearchNode> nlis= new ArrayList<SearchNode>();
 

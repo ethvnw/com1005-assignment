@@ -7,6 +7,7 @@
  * Heidi Christensen 2022 (heidi.christensen@sheffield.ac.uk)
 */
 package searchEngine.Astar;
+
 import java.util.Random;
 
 public class EpuzzGen {

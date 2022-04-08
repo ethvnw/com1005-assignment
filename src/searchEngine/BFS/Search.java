@@ -24,7 +24,7 @@ public abstract class Search {
 	 * run a search
 	 * 
 	 * @param initState initial state
-	 * @param strat     - String specifying strategy
+	 * @param strat String specifying strategy
 	 * @return indication of success or failure
 	 */
 	public String runSearch(SearchState initState, String strategy) {
@@ -41,10 +41,9 @@ public abstract class Search {
 		int iterationCount = 1; // counts the iterations
 
 		while (!open.isEmpty()) {
-
 			// print contents of open
-			System.out.println("iteration no " + iterationCount);
-			System.out.println("open is");
+			System.out.println("Iteration number: " + iterationCount);
+			System.out.println("Open list:");
 			for (SearchNode nn : open) {
 				String nodestr = nn.toString();
 				System.out.println(nodestr);
@@ -52,7 +51,6 @@ public abstract class Search {
 
 			selectNode(strategy); // change from search1 - selectNode selects next node, given strategy
 			// makes it currentNode & removes it from open
-			System.out.println("Current node " + currentNode.toString());
 
 			if (currentNode.goalPredicate(this))
 				return reportSuccess(); // success
@@ -64,10 +62,7 @@ public abstract class Search {
 
 			iterationCount = iterationCount + 1;
 		}
-		;
-
 		return "Search Fails"; // out of the while loop - failure
-
 	}
 
 	// expand current node

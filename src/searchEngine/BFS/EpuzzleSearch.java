@@ -1,14 +1,12 @@
 package searchEngine.BFS;
 
 public class EpuzzleSearch extends Search {
-    /**
-	 * run a search
-	 * 
-	 * @param initState initial state
-	 * @param strat     - String specifying strategy
-	 * @return indication of success or failure
-	 */
-	public String runSearch(EpuzzleState initState, String strategy) {
-        return "hi";
-    }
+	
+	private final int[][] target = {{1,2,3}, 
+									{4,5,6}, 
+									{7,8,0}};
+	
+	public int[][] getTarget() {
+		return target;
+	}
 }

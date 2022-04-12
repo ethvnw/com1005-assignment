@@ -9,11 +9,23 @@ public class RunEpuzzleBFS {
         	{4,2,6},
         	{7,5,8}};
         
-        EpuzzleState p1 = new EpuzzleState(p1Setup);
-
-        System.out.println(p1.getSuccessors(search));
+        int[][] p2Setup = {
+        	{4,1,3},
+        	{7,2,5},
+        	{0,8,6}};
+    
+        int[][] p3Setup = {
+        	{2,3,6},
+        	{1,5,8},
+        	{4,7,0}};
         
-        search.runSearch(p1, "breadthFirst");
+        EpuzzleState p1 = new EpuzzleState(p1Setup);
+        EpuzzleState p2 = new EpuzzleState(p2Setup);
+        EpuzzleState p3 = new EpuzzleState(p3Setup);
+        
+        System.out.println(search.runSearch(p1, "breadthFirst"));
+        System.out.println(search.runSearch(p2, "breadthFirst"));
+        System.out.println(search.runSearch(p3, "breadthFirst"));
 
     }
 }

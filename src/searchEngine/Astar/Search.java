@@ -30,6 +30,7 @@ public abstract class Search {
     initNode.setGlobalCost(0); //change from search2
 
 	  //change from search1 - print strategy
+      System.out.println("===========================");
 	  System.out.println("Starting "+strat+" Search");
 
 	  open = new ArrayList<SearchNode>(); // initial open, closed
@@ -41,20 +42,23 @@ public abstract class Search {
 	  while (!open.isEmpty()) {
 
 	    // print contents of open
-	    System.out.println("-------------------------");
-	    System.out.println("iteration no " + numIteration);
-	    System.out.println("open is");
-	    for (SearchNode nn: open) {
-	      String nodestr = nn.toString();
-		    System.out.println(nodestr);
-	    }
+//	    System.out.println("-------------------------");
+//	    System.out.println("Iteration number: " + numIteration);
+//	    System.out.println("open is");
+//	    for (SearchNode nn: open) {
+//	      String nodestr = nn.toString();
+//		    System.out.println(nodestr);
+//	    }
 
       selectNode(strat); // change from search1 -selectNode selects next node given strategy,
       
       // makes it currentNode & removes it from open
-      System.out.println("Current node: "+currentNode.toString());
+//      System.out.println("Current node: "+currentNode.toString());
 
-      if (currentNode.goalPredicate(this)) return reportSuccess();  //success
+      if (currentNode.goalPredicate(this)) {
+    	  System.out.println("Number of iterations: " + numIteration);
+    	  return reportSuccess();  //success
+      } 
       //change from search1 - call reportSuccess
 
       expand(); // go again
@@ -186,16 +190,17 @@ public abstract class Search {
 
 
    //Selection Strategies
-   private void selectNode(String strat) {
-	  if (strat== "depthFirst")
-      depthFirst();
-    else
-      if(strat=="breadthFirst")
-        breadthFirst();
-      else
-        if(strat=="branchAndBound")
-          branchAndBound();
-        else AStar();
+  private void selectNode(String strat) {
+	   if (strat== "depthFirst")
+		   depthFirst();
+	   else if (strat=="breadthFirst")
+		   breadthFirst();
+	   else if (strat=="branchAndBound")
+		   branchAndBound();
+	   else 
+		   AStar();
+	   
+	   
    }
 
     private void depthFirst () {
@@ -259,7 +264,7 @@ public abstract class Search {
 	    System.out.println("Search Succeeds");
 
     	System.out.println("Efficiency "+ ((float) plen/(closed.size()+1)));
-	    System.out.println("Solution Path\n");
+	    System.out.println("Solution Path");
 	    return buf.toString();
     }
 

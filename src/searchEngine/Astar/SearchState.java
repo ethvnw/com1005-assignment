@@ -18,6 +18,7 @@ public abstract class SearchState {
   protected int localCost;
   // A*
   protected int estRemCost;
+  protected String distanceType = "Hamming";
 
   /**
   * accessor for local cost

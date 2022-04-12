@@ -84,7 +84,7 @@ public class SearchNode {
   }
 
   public String toString() {
-    return "has state " + state.toString();
+    return state.toString();
   }
 
 }

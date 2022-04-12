@@ -31,6 +31,7 @@ public abstract class Search {
 
 		initNode = new SearchNode(initState); // create initial node
 
+		System.out.println("===========================");
 		System.out.println("Starting " + strategy + " Search"); // change from search1 - print strategy
 
 		open = new ArrayList<SearchNode>(); // initial open, closed
@@ -42,18 +43,20 @@ public abstract class Search {
 
 		while (!open.isEmpty()) {
 			// print contents of open
-			System.out.println("Iteration number: " + iterationCount);
-			System.out.println("Open list:");
-			for (SearchNode nn : open) {
-				String nodestr = nn.toString();
-				System.out.println(nodestr);
-			}
+//			System.out.println("Iteration number: " + iterationCount);
+//			System.out.println("Open list:");
+//			for (SearchNode nn : open) {
+//				String nodestr = nn.toString();
+//				System.out.println(nodestr);
+//			}
 
 			selectNode(strategy); // change from search1 - selectNode selects next node, given strategy
 			// makes it currentNode & removes it from open
 
-			if (currentNode.goalPredicate(this))
+			if (currentNode.goalPredicate(this)) {
+				System.out.println("Number of iterations: " + iterationCount);
 				return reportSuccess(); // success
+			}
 			// change from search1 - call reportSuccess
 			// - must pass search instance to goalP
 			expand(); // go again
@@ -62,6 +65,7 @@ public abstract class Search {
 
 			iterationCount = iterationCount + 1;
 		}
+		System.out.println("Number of iterations: " + iterationCount);
 		return "Search Fails"; // out of the while loop - failure
 	}
 
@@ -155,11 +159,10 @@ public abstract class Search {
 			plen = plen + 1;
 		}
 
-		System.out.println("=========================== \n");
+		System.out.println("===========================");
 		System.out.println("Search Succeeds");
-
-		System.out.println("Efficiency " + ((float) plen / (closed.size() + 1)));
-		System.out.println("Solution Path\n");
+		System.out.println("Efficiency: " + ((float) plen / (closed.size() + 1)));
+		System.out.println("Solution Path:");
 		return buf.toString();
 	}
 

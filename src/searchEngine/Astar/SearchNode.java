@@ -164,10 +164,10 @@ public  class SearchNode {
   public  String toString() {
   	String parent_state;
     if (parent==null) 
-      parent_state="null"; 
+      parent_state="null, "; 
     else 
       parent_state=parent.get_State().toString();
-    return "\n++++++node+++++\nstate "+state.toString()+"\nparent "+parent_state+" lc "+localCost+" gc "+globalCost+" erc "+estRemCost+" etc "+estTotalCost+"\n++++end node++++";
+    return "\n=========\nNode:\n"+state.toString()+"\nParent:\n"+parent_state+"Local Cost: "+localCost+" Global Cost: "+globalCost+" Est remaining cost: "+estRemCost+" Est total cost: "+estTotalCost;
   }
 
 

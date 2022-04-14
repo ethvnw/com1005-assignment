@@ -18,7 +18,7 @@ public abstract class SearchState {
   protected int localCost;
   // A*
   protected int estRemCost;
-  protected String distanceType = "Hamming";
+  protected String distanceType = "Manhattan";
 
   /**
   * accessor for local cost

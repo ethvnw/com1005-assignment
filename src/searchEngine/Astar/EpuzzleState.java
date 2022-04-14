@@ -12,12 +12,14 @@ public class EpuzzleState extends SearchState {
 		super.estRemCost = estRCost;
 	}
 	
-	private int calcEstRemCost(int[][] state, Search searcher) {
-		int numOutPlace = 0;
+	public int calcEstRemCost(int[][] state, Search searcher) {
 		EpuzzleSearch epSearch = (EpuzzleSearch) searcher;
 		int[][] target = epSearch.getTarget();
 		
 		if (distanceType == "Hamming") {
+			int numOutPlace = 0;
+			
+			// Check if each item matches the target
 			for (int row=0; row<3; row++) {
 	        	for (int col=0; col<3; col++) {
 	        		if (state[row][col] != target[row][col])
@@ -27,8 +29,30 @@ public class EpuzzleState extends SearchState {
 	        return numOutPlace;
 		}
 		else if (distanceType == "Manhattan") {
-			
+			int distance = 0;
+			int xCo = 0;
+			int yCo = 0;
+
+			for(int itr=0; itr<9; itr++) {
+		        for(int row=0; row<3; row++) {
+		        	for(int col=0; col<3; col++) {
+		        		if (state[row][col] == itr) {
+		        			xCo = row;
+		        			yCo = col;
+		        		}
+		        	}
+		        }
+		
+		        for(int row=0; row<3; row++) {
+		        	for(int col=0; col<= 2; col++) {
+		        		if (target[row][col] == itr)
+		        			distance = distance + Math.abs(row - xCo) + Math.abs(col - yCo);
+		           	}
+		        }
+			}
+			return distance;
 		}
+		// Not a valid distance type
 		return 0;
 	}
 	

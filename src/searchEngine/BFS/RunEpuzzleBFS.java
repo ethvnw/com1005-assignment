@@ -1,5 +1,10 @@
 package searchEngine.BFS;
 
+/**
+ * Class containing main method to run the search
+ * @author Ethan Watts
+ */
+
 public class RunEpuzzleBFS {
     
     public static void main(String[] args) {
@@ -23,8 +28,8 @@ public class RunEpuzzleBFS {
         EpuzzleState p2 = new EpuzzleState(p2Setup);
         EpuzzleState p3 = new EpuzzleState(p3Setup);
         
-        System.out.println(search.runSearch(p1, "breadthFirst"));
-        System.out.println(search.runSearch(p2, "breadthFirst"));
+//        System.out.println(search.runSearch(p1, "breadthFirst"));
+//        System.out.println(search.runSearch(p2, "breadthFirst"));
         System.out.println(search.runSearch(p3, "breadthFirst"));
 
     }

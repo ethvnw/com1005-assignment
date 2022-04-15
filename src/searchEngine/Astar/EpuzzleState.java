@@ -2,9 +2,16 @@ package searchEngine.Astar;
 
 import java.util.*;
 
+/**
+ * Extension of the SearchState class to account for the changes
+ * needed for 8-puzzle
+ * @author Ethan Watts
+ */
+
 public class EpuzzleState extends SearchState {
 	
 	private int[][] state;
+	public static String distanceType = "Manhattan";
 	
 	public EpuzzleState(int[][] state, int estRCost) {
 		this.state = state;
@@ -12,28 +19,38 @@ public class EpuzzleState extends SearchState {
 		super.estRemCost = estRCost;
 	}
 	
-	public int calcEstRemCost(int[][] state, Search searcher) {
+	/**
+	 * Calculates the estimated remaining cost for search, distance type
+	 * is specified in EpuzzleState.distanceType (Hamming/Manhattan)
+	 * @param state 2D array to calculate cost of
+	 * @param searcher The search engine object running the search
+	 * @return remaining cost for search, depending on distance type
+	 */
+	private int calcEstRemCost(int[][] state, Search searcher) {
 		EpuzzleSearch epSearch = (EpuzzleSearch) searcher;
 		int[][] target = epSearch.getTarget();
 		
-		if (distanceType == "Hamming") {
+		// Check distanceType
+		if (EpuzzleState.distanceType == "Hamming") {
 			int numOutPlace = 0;
 			
-			// Check if each item matches the target
 			for (int row=0; row<3; row++) {
 	        	for (int col=0; col<3; col++) {
+	        		// Counter incremented if current element isn't equal
 	        		if (state[row][col] != target[row][col])
 	        			numOutPlace ++;
 	        	}
 	    	}
-	        return numOutPlace;
+	        return numOutPlace;	
 		}
-		else if (distanceType == "Manhattan") {
+		// Check distanceType
+		else if (EpuzzleState.distanceType == "Manhattan") {
 			int distance = 0;
 			int xCo = 0;
 			int yCo = 0;
 
-			for(int itr=0; itr<9; itr++) {
+			for(int itr=1; itr<9; itr++) {
+				// Get the coordinates of current itr value (1-8)
 		        for(int row=0; row<3; row++) {
 		        	for(int col=0; col<3; col++) {
 		        		if (state[row][col] == itr) {
@@ -42,11 +59,12 @@ public class EpuzzleState extends SearchState {
 		        		}
 		        	}
 		        }
-		
+		        
+		        // Calculate distance from target position of itr to current position
 		        for(int row=0; row<3; row++) {
 		        	for(int col=0; col<= 2; col++) {
 		        		if (target[row][col] == itr)
-		        			distance = distance + Math.abs(row - xCo) + Math.abs(col - yCo);
+		        			distance += Math.abs(row - xCo) + Math.abs(col - yCo);
 		           	}
 		        }
 			}
@@ -57,10 +75,10 @@ public class EpuzzleState extends SearchState {
 	}
 	
 	/**
-	 * Checks if current state is equal to target
-	 * @param searcher search object
-	 * @return whether state is equal
-	 */
+     * Checks if current state is equal to goal
+     * @param searcher The search engine object running the search
+     * @return true if state is equal to goal
+     */
     boolean goalPredicate(Search searcher) {
     	EpuzzleSearch epSearch = (EpuzzleSearch) searcher;
         int[][] target = epSearch.getTarget();
@@ -74,10 +92,7 @@ public class EpuzzleState extends SearchState {
         return true;
     }
 
-    /** getSuccessors returns an ArrayList of states which are successors to the
-    * current state in a given search
-    */
-    
+    // Manual 2D array copying
     private int[][] copyState(int[][] toCopy) {
     	int[][] copiedA = new int[3][3];
     	for (int row=0; row<3; row++) {
@@ -87,9 +102,17 @@ public class EpuzzleState extends SearchState {
     	return copiedA;
     }
     
+    /**
+     * Creates list of possible new states that can be reached from current
+     * @param searcher The search engine object running the search
+     * @return <code>ArrayList</code> of <code>SearchState</code>
+     */
     ArrayList<SearchState> getSuccessors(Search searcher) {
         ArrayList<EpuzzleState> successors = new ArrayList<EpuzzleState>();
         int[][] compare;
+        
+        // Finds the coordinate on the grid with the empty space,
+        // Adds all possible moves from this position to the ArrayList
         
         if (state[0][0] == 0) {
         	compare = copyState(state);
@@ -268,7 +291,8 @@ public class EpuzzleState extends SearchState {
         		compare, 
         		this.calcEstRemCost(compare, searcher)));
         }
-        
+
+        // Converts states to SearchState for search engine to use
         ArrayList<SearchState> castList = new ArrayList<SearchState>();
         for (EpuzzleState ep : successors)
         	castList.add((SearchState) ep);
@@ -278,10 +302,13 @@ public class EpuzzleState extends SearchState {
     }
 
     /**
-    * sameState: is this state identical to a given one?
-    */
+     * Checks if provided state is equal to current
+     * @param n2 the state to be compared to
+     * @return true if the states are the same
+     */
     boolean sameState(SearchState n2) {
     	EpuzzleState comState = (EpuzzleState) n2;
+    	// Get the array containing the grid from n2
     	int[][] comPuzz = comState.state;
     	
     	for (int row=0; row<3; row++) {

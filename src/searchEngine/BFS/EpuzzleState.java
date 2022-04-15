@@ -2,6 +2,12 @@ package searchEngine.BFS;
 
 import java.util.*;
 
+/**
+ * Extension of the SearchState class to account for the changes
+ * needed for 8-puzzle
+ * @author Ethan Watts
+ */
+
 public class EpuzzleState extends SearchState {
 	
 	private int[][] state;
@@ -11,8 +17,10 @@ public class EpuzzleState extends SearchState {
 	}
 	
     /**
-    * goalPredicate takes a SearchNode & returns a boolean if it's a goal
-    */
+     * Checks if current state is equal to goal
+     * @param searcher The search engine object running the search
+     * @return true if state is equal to goal
+     */
     boolean goalPredicate(Search searcher) {
     	EpuzzleSearch epSearch = (EpuzzleSearch) searcher;
         int[][] target = epSearch.getTarget();
@@ -25,11 +33,8 @@ public class EpuzzleState extends SearchState {
         }
         return true;
     }
-
-    /** getSuccessors returns an ArrayList of states which are successors to the
-    * current state in a given search
-    */
     
+    // Manual 2D array copying
     private int[][] copyState(int[][] toCopy) {
     	int[][] copiedA = new int[3][3];
     	for (int row=0; row<3; row++) {
@@ -39,9 +44,17 @@ public class EpuzzleState extends SearchState {
     	return copiedA;
     }
     
+    /**
+     * Creates list of possible new states that can be reached from current
+     * @param searcher The search engine object running the search
+     * @return <code>ArrayList</code> of <code>SearchState</code>
+     */
     ArrayList<SearchState> getSuccessors(Search searcher) {
         ArrayList<EpuzzleState> successors = new ArrayList<EpuzzleState>();
         int[][] compare;
+        
+        // Finds the coordinate on the grid with the empty space,
+        // Adds all possible moves from this position to the ArrayList
         
         if (state[0][0] == 0) {
         	compare = copyState(state);
@@ -173,6 +186,7 @@ public class EpuzzleState extends SearchState {
         	successors.add(new EpuzzleState(compare));
         }
         
+        // Converts states to SearchState for search engine to use
         ArrayList<SearchState> castList = new ArrayList<SearchState>();
         for (EpuzzleState ep : successors)
         	castList.add((SearchState) ep);
@@ -182,10 +196,13 @@ public class EpuzzleState extends SearchState {
     }
 
     /**
-    * sameState: is this state identical to a given one?
-    */
+     * Checks if provided state is equal to current
+     * @param n2 the state to be compared to
+     * @return true if the states are the same
+     */
     boolean sameState(SearchState n2) {
     	EpuzzleState comState = (EpuzzleState) n2;
+    	// Get the array containing the grid from n2
     	int[][] comPuzz = comState.state;
     	
     	for (int row=0; row<3; row++) {

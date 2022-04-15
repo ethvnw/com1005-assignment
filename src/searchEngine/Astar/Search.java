@@ -31,7 +31,9 @@ public abstract class Search {
 
 	  //change from search1 - print strategy
       System.out.println("===========================");
-	  System.out.println("Starting "+strat+" Search");
+      if (!EpuzzleState.distanceType.equals("Hamming") && !EpuzzleState.distanceType.equals("Manhattan"))
+    	  System.out.println("Invalid distance type");
+	  System.out.println("Starting "+strat+" Search with " + EpuzzleState.distanceType);
 
 	  open = new ArrayList<SearchNode>(); // initial open, closed
 	  open.add(initNode);

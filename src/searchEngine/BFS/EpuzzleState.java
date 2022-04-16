@@ -1,4 +1,3 @@
-package searchEngine.BFS;
 
 import java.util.*;
 

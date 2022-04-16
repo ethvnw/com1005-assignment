@@ -1,5 +1,3 @@
-package searchEngine.Astar;
-
 /**
  * Extension of Search class to account for 8-puzzle needs
  * @author Ethan Watts

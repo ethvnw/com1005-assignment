@@ -2,3 +2,6 @@ brief.pdf
 /bin/
 /src/test/
 /src/testAA/
+/report/
+/.settings/
+/src/searchEngine/RunTest.java

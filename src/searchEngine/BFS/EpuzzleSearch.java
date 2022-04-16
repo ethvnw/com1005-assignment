@@ -1,4 +1,3 @@
-package searchEngine.BFS;
 
 /**
  * Extension of Search class to account for 8-puzzle needs

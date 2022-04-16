@@ -1,4 +1,3 @@
-package searchEngine.BFS;
 
 /**
  * Class containing main method to run the search

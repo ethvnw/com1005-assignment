@@ -1,4 +1,3 @@
-package searchEngine.Astar;
 /**
  * Class containing main method to run the search
  * @author Ethan Watts

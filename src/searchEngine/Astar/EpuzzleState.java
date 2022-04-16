@@ -1,5 +1,3 @@
-package searchEngine.Astar;
-
 import java.util.*;
 
 /**
@@ -11,7 +9,7 @@ import java.util.*;
 public class EpuzzleState extends SearchState {
 	
 	private int[][] state;
-	public static String distanceType = "Manhattan";
+	public static String distanceType = "Hamming";
 	
 	public EpuzzleState(int[][] state, int estRCost) {
 		this.state = state;

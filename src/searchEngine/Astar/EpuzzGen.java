@@ -6,7 +6,6 @@
  * Phil Green 2017
  * Heidi Christensen 2022 (heidi.christensen@sheffield.ac.uk)
 */
-package searchEngine.Astar;
 
 import java.util.Random;
 
